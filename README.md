@@ -1,40 +1,92 @@
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=11051656)
+
 # Практична робота "Поглиблене використання масивів"
+> **Завдання 4.** Знайти друге за величиною число у матриці розміром N x M.
 
-Цей репозиторій містить iнструкції та стартовий код для виконання практичної роботи з теми.
+## В рамках практичної роботи я зробила наступне:
+* проаналізувала обране завдання і обрала оптимальний алгоритм для його вирішення;
+* написала клас, який містить методи для розв'язання обраного мною завдання та тестовий клас, який дозволяє перевірити його роботу;
+* в кінці своєї роботи над класом `Main` я додала javadoc-коментарі.
+---
+Програмний код класу `Main` наведений нижче.
 
-## В рамках практичної роботи ви маєте зробити наступне:
-1. написати клас, який містить методи для розв'язання обраного вами завдання та тестовий клас, який дозволяє перевірити його роботу. Класи мають міститись у теці ```src```. Не забуваємо про те, що основний клас **має бути універсальним, тобто він не містить інтерфейсу користувача - лише логіку (статичний метод), яка диктується завданням** (і можливо не всі його методи мають бути публічними)!
-2. методу ```main``` тестового класу **не може містити ніякої логіки, пов'язаної з виконанням завдання** - лише перевіряти працездатність основного класу!
-3. **README.MD репозиторію має містити опис обраного вами завдання** (краще - з картинками та форматуванням :blush:)!
-4. **УВАГА!** Не слід вважати, що завдання дуже прості! Вам необхідно подбати про:
-    * **оптимізацію програми - обрати оптимальні з точки зору обсягу використовуваної пам'яті типи даних**
-    * **іменування змінних і констант у відповідності до рекомендацій**
-    * **javadoc-коментарі для основного класу, які пояснюють що саме обчислюється і які вихідні дані для цього потрібні**
-5. завдання намагаємось виконувати **без циклів - з використанням класу ````Arrays````** (див. відеолекцію, та приклад, який я там розв'язав)
-6. здати завдання. **Нагадую, що здаючи завдання через Google Classroom, слід вказати посилання на створений для вас репозиторій!**
+```java
+package domain;
 
-**P.S.** Ви можете обрати завдання на власний розсуд - реалізувати алгоритм, який вас зацікавив, однак якщо буде надто багато однакових класів, завдання не буде зараховано - намагайтесь робити самотужки та у власному стилі! Звісно ж, ніхто не забороняє користуватись Інтернетом, шукати й використовувати знайдене у Мережі!
+import java.util.Arrays;
+import java.util.Random;
 
-----
+/**
+ *
+ * The Main class generates a matrix and finds the second largest number in it.
+ */
+public class Main {
 
-## Список завдань
-1. Заповніть квадратну матрицю заданого порядку N простими числами з вказаного діапазону і виведіть її 
-2. Заповнити квадратну матрицю заданого порядку N числами в порядку зростання, починаючи з заданого числа x, наприклад (для N=3, x=14), <pre>
-[14,15,16]
-[17,18,19]
-[20,21,22]</pre>
-3. Знайти в матриці розміром N x M число, яке повторюється найбільшу кількість разів
-4. Знайти друге за величиною число у матриці розміром N x M 
-5. Обчислити суму елементів матриці розміром N x M 
-6. Знайти [добуток](https://uk.wikipedia.org/wiki/%D0%9C%D0%BD%D0%BE%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D1%8C) двох матриць розмірами N x M та  M x Q
-7. Знайти суму двох матриць розміром N x M 
-8.  Відсортувати квадратну матрицю заданого порядку N у порядку зростання елементів (зліва-направо, зверху-вниз)
-9. [Транспонувати](https://uk.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B0_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D1%8F) (замінити рядки стовпцями) матрицю розміром N x M 
-10. Заповніть матрицю розміром N x M числами, кожне з яких дорівнює сумі двох попередніх елементів (елементи a<sub>11</sub> a<sub>12</sub>  дорівнюють 1, а інші обчислюються за правилом: a<sub>ij</sub> = a<sub>ij-1</sub> + a<sub>ij-2</sub>)
-11. Знайти максимальні елементи рядків матриці розміром N x M
-12. Знайти рядок матриці розміром N x M з максимальною сумою елементів
-13. Знайти стовпець матриці розміром N x M з максимальною сумою елементів
-14. У матриці розміром N x M поміняти місцями два вказвні рядки
-15. У матриці розміром N x M поміняти місцями два вказвні стовпці
-16. З заданої матриці розміром N x M утворити нову матрицю останній стовпець якої містить суми елементів рядків вихідної матриці
+    public static void startExecution(int rows, int columns) {
+        int[][] matrix = generateMatrix(rows, columns);     
+        findSecondLargestNumber(matrix);
+    }
+    
+    /**
+     * Generates a matrix of random integers between 0 and 99, based on the given number of rows and columns.
+     * @param rows The number of rows in the matrix.
+     * @param columns The number of columns in the matrix.
+     * @return The generated matrix.
+     */
+    private static int[][] generateMatrix(int rows, int columns) {
+        int[][] matrix = new int[rows][columns];
+
+        Arrays.setAll(matrix, row -> new Random().ints(columns, 0, 100).toArray());
+
+        System.out.println("Матриця:");
+        
+        for (int[] row : matrix) {
+            System.out.println(Arrays.toString(row));
+        }
+        
+        return matrix;
+    }
+
+    /**
+     * Finds the second largest number in the given matrix and prints it to the console.
+     * @param matrix The matrix to find the second largest number in.
+     */
+    private static void findSecondLargestNumber(int[][] matrix) {
+        int[] sortedNumbersOfMatrix = Arrays.stream(matrix)
+            .flatMapToInt(Arrays::stream)
+            .sorted()
+            .distinct()
+            .toArray();
+
+        int secondLargestNumber = sortedNumbersOfMatrix.length < 2 
+                ? sortedNumbersOfMatrix[0] 
+                : sortedNumbersOfMatrix[sortedNumbersOfMatrix.length - 2];
+        
+        System.out.println("Друге найбільше число: " + secondLargestNumber);      
+    }
+}
+```
+
+Програмний код класу `MainTest` наведений нижче.
+
+```java
+package test;
+
+import domain.Main;
+import java.util.Scanner;
+
+public class MainTest {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Введіть кількість рядків матриці: ");
+        int rows = scanner.nextInt();
+
+        System.out.print("Введіть кількість стовпців матриці: ");
+        int columns = scanner.nextInt();
+        
+        Main.startExecution(rows, columns);
+    }
+}
+```
+* Перевірка працездатності класу `Main` ✅. Результат запуска коду наведений нижче.
+![alt-текст](https://github.com/ppc-ntu-khpi/34-advarrays-vellerii/blob/master/result.png "result.png")
