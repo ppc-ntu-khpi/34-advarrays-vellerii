@@ -88,5 +88,5 @@ public class MainTest {
     }
 }
 ```
-* Перевірка працездатності класу `Main` ✅. Результат запуска коду наведений нижче.
+Перевірка працездатності класу `Main` ✅. Результат запуска коду наведений нижче.
 ![alt-текст](https://github.com/ppc-ntu-khpi/34-advarrays-vellerii/blob/master/result.png "result.png")
